@@ -1226,7 +1226,7 @@ namespace ImGuizmo
             gContext.mRadiusSquareCenter = radiusAxis;
          }
 
-         drawList->AddPolyline(circlePos, circleMul * halfCircleSegmentCount + 1, colors[3 - axis], false, 2, lineThickness);
+         drawList->AddPolyline(circlePos, circleMul * halfCircleSegmentCount + 1, colors[3 - axis], false, lineThickness);
       }
       if(hasRSC)
       {
@@ -1771,7 +1771,8 @@ namespace ImGuizmo
 
       vec_t deltaScreen = { io.MousePos.x - gContext.mScreenSquareCenter.x, io.MousePos.y - gContext.mScreenSquareCenter.y, 0.f, 0.f };
       float dist = deltaScreen.Length();
-     if (dist >= (gContext.mRadiusSquareCenter * 1.1f - 3.0f) && dist < (gContext.mRadiusSquareCenter * 1.1f + 2.0f))
+      if (Intersects(op, ROTATE_SCREEN) && dist >= (gContext.mRadiusSquareCenter - 1.0f) && dist < (gContext.mRadiusSquareCenter + 1.0f))
+      {
          type = MT_ROTATE_SCREEN;
       }
 
